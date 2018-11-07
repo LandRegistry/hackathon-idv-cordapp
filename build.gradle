@@ -87,8 +87,8 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
             adminAddress("localhost:10043")
         }
         cordapps = [
-                "$project.group:cordapp-contracts-states:$project.version",
-                "$project.group:cordapp:$project.version"
+                "$project.group:hackathon-idv-cordapp-contracts-states:$project.version",
+                "$project.group:hackathon-idv-cordapp:$project.version"
         ]
     }
     node {
@@ -99,21 +99,21 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
             adminAddress("localhost:10046")
         }
         cordapps = [
-                "$project.group:cordapp-contracts-states:$project.version",
-                "$project.group:cordapp:$project.version"
+                "$project.group:hackathon-idv-cordapp-contracts-states:$project.version",
+                "$project.group:hackathon-idv-cordapp:$project.version"
         ]
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
     node {
-        name "O=Seller,L=London,C=GB"
+        name "O=Retail,L=London,C=GB"
         p2pPort 10008
         rpcSettings {
             address("localhost:10009")
             adminAddress("localhost:10049")
         }
         cordapps = [
-                "$project.group:cordapp-contracts-states:$project.version",
-                "$project.group:cordapp:$project.version"
+                "$project.group:hackathon-idv-cordapp-contracts-states:$project.version",
+                "$project.group:hackathon-idv-cordapp:$project.version"
         ]
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
@@ -125,8 +125,8 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
             adminAddress("localhost:10050")
         }
         cordapps = [
-                "$project.group:cordapp-contracts-states:$project.version",
-                "$project.group:cordapp:$project.version"
+                "$project.group:hackathon-idv-cordapp-contracts-states:$project.version",
+                "$project.group:hackathon-idv-cordapp:$project.version"
         ]
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
@@ -138,8 +138,8 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
             adminAddress("localhost:10051")
         }
         cordapps = [
-                "$project.group:cordapp-contracts-states:$project.version",
-                "$project.group:cordapp:$project.version"
+                "$project.group:hackathon-idv-cordapp-contracts-states:$project.version",
+                "$project.group:hackathon-idv-cordapp:$project.version"
         ]
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
@@ -151,8 +151,8 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
             adminAddress("localhost:10052")
         }
         cordapps = [
-                "$project.group:cordapp-contracts-states:$project.version",
-                "$project.group:cordapp:$project.version"
+                "$project.group:hackathon-idv-cordapp-contracts-states:$project.version",
+                "$project.group:hackathon-idv-cordapp:$project.version"
         ]
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }

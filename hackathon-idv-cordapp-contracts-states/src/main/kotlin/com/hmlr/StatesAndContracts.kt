@@ -4,7 +4,10 @@ import net.corda.core.contracts.CommandData
 import net.corda.core.contracts.Contract
 import net.corda.core.contracts.ContractState
 import net.corda.core.identity.AbstractParty
+import net.corda.core.identity.Party
 import net.corda.core.transactions.LedgerTransaction
+import com.hmlr.*
+import com.hmlr.model.TrustObject
 
 // ************
 // * Contract *
@@ -30,6 +33,15 @@ class TemplateContract : Contract {
 // *********
 // * State *
 // *********
-data class TemplateState(val data: String) : ContractState {
+data class TrustRequestState(val requestor: Party,
+                             val provider: Party,
+                             val context: String) : ContractState {
+    override val participants: List<AbstractParty> = listOf()
+}
+
+data class TrustState(val requestor: Party,
+                      val provider: Party,
+                      val data: TrustObject,
+                      val validated: Boolean) : ContractState {
     override val participants: List<AbstractParty> = listOf()
 }
