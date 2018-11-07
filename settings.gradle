@@ -1,3 +1,2 @@
-include 'cordapp'
-include 'cordapp-contracts-states'
-include 'clients'
+include 'hackathon-idv-cordapp-flows'
+include 'hackathon-idv-cordapp-contracts-states'
