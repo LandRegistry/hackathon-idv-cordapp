@@ -38,9 +38,22 @@ class RequestTrustObjectFlow(val requestor: Party,
 
 @InitiatingFlow
 @StartableByRPC
-class ReturnTrustObjectFlow(val counterpartySession: FlowSession) : FlowLogic<Unit>() {
+class ReturnTrustObjectFlow(val requestor: Party,
+                            val trustObject: TrustObject) : FlowLogic<Unit>() {
+
     @Suspendable
     override fun call() {
-        // Responder flow logic goes here.
+        val notary = serviceHub.networkMapCache.notaryIdentities[0]
+
+        val outputState = TrustState(requestor, ourIdentity, trustObject, false)
+        val cmd = Command(TemplateContract.Commands.Action(), ourIdentity.owningKey)
+
+        val txBuilder = TransactionBuilder(notary = notary)
+                .addOutputState(outputState, TemplateContract.ID)
+                .addCommand(cmd)
+
+        val signedTx = serviceHub.signInitialTransaction(txBuilder)
+
+        subFlow(FinalityFlow(signedTx))
     }
 }
