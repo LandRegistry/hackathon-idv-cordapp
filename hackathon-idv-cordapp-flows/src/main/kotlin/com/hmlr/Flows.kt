@@ -1,7 +1,11 @@
 package com.hmlr
 
 import co.paralleluniverse.fibers.Suspendable
+import com.hmlr.model.*
+import net.corda.core.contracts.Command
 import net.corda.core.flows.*
+import net.corda.core.identity.Party
+import net.corda.core.transactions.TransactionBuilder
 import net.corda.core.utilities.ProgressTracker
 
 // *********
@@ -9,17 +13,32 @@ import net.corda.core.utilities.ProgressTracker
 // *********
 @InitiatingFlow
 @StartableByRPC
-class Initiator : FlowLogic<Unit>() {
+class RequestTrustObjectFlow(val requestor: Party,
+                             val provider: Provider,
+                             val context: String): FlowLogic<Unit>() {
     override val progressTracker = ProgressTracker()
+
 
     @Suspendable
     override fun call() {
-        // Initiator flow logic goes here.
+        val notary = serviceHub.networkMapCache.notaryIdentities[0]
+
+        val outputState = TrustRequestState(requestor, provider, context)
+        val cmd = Command(TemplateContract.Commands.Action(), ourIdentity.owningKey)
+
+        val txBuilder = TransactionBuilder(notary = notary)
+                .addOutputState(outputState, TemplateContract.ID)
+                .addCommand(cmd)
+
+        val signedTx = serviceHub.signInitialTransaction(txBuilder)
+
+        subFlow(FinalityFlow(signedTx))
     }
 }
 
-@InitiatedBy(Initiator::class)
-class Responder(val counterpartySession: FlowSession) : FlowLogic<Unit>() {
+@InitiatingFlow
+@StartableByRPC
+class ReturnTrustObjectFlow(val counterpartySession: FlowSession) : FlowLogic<Unit>() {
     @Suspendable
     override fun call() {
         // Responder flow logic goes here.

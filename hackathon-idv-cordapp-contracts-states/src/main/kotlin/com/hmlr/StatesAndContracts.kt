@@ -7,6 +7,7 @@ import net.corda.core.identity.AbstractParty
 import net.corda.core.identity.Party
 import net.corda.core.transactions.LedgerTransaction
 import com.hmlr.*
+import com.hmlr.model.Provider
 import com.hmlr.model.TrustObject
 
 // ************
@@ -34,7 +35,7 @@ class TemplateContract : Contract {
 // * State *
 // *********
 data class TrustRequestState(val requestor: Party,
-                             val provider: Party,
+                             val provider: Provider,
                              val context: String) : ContractState {
     override val participants: List<AbstractParty> = listOf()
 }

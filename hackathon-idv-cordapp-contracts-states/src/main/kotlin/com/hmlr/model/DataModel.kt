@@ -6,3 +6,6 @@ import net.corda.core.serialization.CordaSerializable
 @CordaSerializable
 data class TrustObject(val token: String)
 
+@CordaSerializable
+data class Provider(val party: Party?, val partyUrl: String?)
+
