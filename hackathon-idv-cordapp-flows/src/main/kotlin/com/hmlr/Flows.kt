@@ -13,7 +13,7 @@ import net.corda.core.utilities.ProgressTracker
 // *********
 @InitiatingFlow
 @StartableByRPC
-class RequestTrustObjectFlow(val requestor: Party,
+class RequestTrustObjectFlow(val requestor: Individual,
                              val provider: Provider,
                              val context: String): FlowLogic<Unit>() {
     override val progressTracker = ProgressTracker()
@@ -38,7 +38,7 @@ class RequestTrustObjectFlow(val requestor: Party,
 
 @InitiatingFlow
 @StartableByRPC
-class ReturnTrustObjectFlow(val requestor: Party,
+class ReturnTrustObjectFlow(val requestor: Individual,
                             val trustObject: TrustObject) : FlowLogic<Unit>() {
 
     @Suspendable
